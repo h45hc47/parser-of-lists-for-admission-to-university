@@ -1,5 +1,7 @@
-import requests
 from bs4 import BeautifulSoup
+
+import requests
+
 
 def what_place(tr):
     main_link = 'https://etu.ru/'
@@ -30,11 +32,13 @@ def what_place(tr):
             temp = [number, group, ball]
             trs_list.append(temp)
         for tr in trs_list:
-            if (tr[1] == 'ОК' and int(tr[2]) <= 246) or tr[1] == 'К' and int(tr[2]) <= 246:
+            if (tr[1] == 'ОК' and int(tr[2]) <= 246) \
+                    or tr[1] == 'К' and int(tr[2]) <= 246:
                 places.append(tr[0])
                 break
-    print(td_all)
+    print(td_all, places)
     return(td_all, places)
+
 
 def leti_tables(table):
     places = []
@@ -43,6 +47,7 @@ def leti_tables(table):
     for tr in trs:
         places.append(what_place(tr))
     return(places)
+
 
 def leti():
     url = 'https://etu.ru/ru/abiturientam/priyom-na-1-y-kurs/podavshie-zayavlenie/'
@@ -63,11 +68,11 @@ def leti():
         print('\t', h2_true[i])
         for k in range(len(places[i])):
             print('\t\t', places[i][k][0], *places[i][k][1])
-        
 
 
 def main():
     leti()
+
 
 if __name__ == '__main__':
     main()
