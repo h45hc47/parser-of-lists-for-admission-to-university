@@ -60,10 +60,11 @@ class Parser(BaseParser):
                 for tr in trs
             ]
 
-            places += [
-                tr[0] for tr in trs_list
-                if (tr[1] == 'ОК' and int(tr[2]) <= 246) or tr[1] == 'К' and int(tr[2]) <= 246
-            ]
+            for trd in trs_list:
+                if (trd[1] == 'ОК' and int(trd[2]) <= 246) \
+                        or trd[1] == 'К' and int(trd[2]) <= 246:
+                    places.append(trd[0])
+                    break
 
         num, name, *_ = tr.findAll('td')
         td_all = f"{num.text} {name.text}"
